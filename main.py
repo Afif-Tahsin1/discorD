@@ -106,4 +106,5 @@ async def unban_slash(interaction: discord.Interaction, user_input : str):
               await interaction.response.send_message(f"{user.name} is unbanned from the server")
         else:
             await interaction.send(f"Can't find user {user.name}")
+            #KI HOILO???!
 bot.run(token)
