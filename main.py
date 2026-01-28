@@ -11,7 +11,9 @@ def home():
     return "I am alive! Boss!"
 
 def run_web():
-    app.run(host='0.0.0.0', port=8080)
+    # Render যদি কোনো পোর্ট দেয় সেটা নেবে, না দিলে ৮০৮০ নেবে
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
 
 def keep_alive():
     t = Thread(target=run_web)
