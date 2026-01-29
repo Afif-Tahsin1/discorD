@@ -7,7 +7,7 @@ import os
 
 # --- Flask Server ---
 app = Flask('')
-
+channelW = {}
 @app.route('/')
 def home():
     return "I am alive! Boss!"
@@ -82,9 +82,23 @@ async def alert(ctx, member: discord.Member):
     
     await ctx.send(f"{member.mention}, You've been warned")
     await member.send(f"You've been warned from {ctx.guild.name}")
-        
-# --- Slash Commands (Tree) ---
 
+
+# --- Slash Commands (Tree) ---
+@bot.tree.command(name="setwelcome", description="set a channel for welcome")
+@commands.has_permissions(administrator=True)
+async def setwelcome(interaction: discord.Interaction, channel: discord.TextChannel):
+    channelW[interaction.guild.id] = channel.id
+    await interaction.response.send_message(f"Your welcome channel set for {channel.mention}!")
+@bot.event
+async def on_member_join(member):
+    guild_id = member.guild.id
+    if guild_id in channelW:
+        channel_id = channelW[guild_id]
+        channel = bot.get_channel(channel_id)
+        if channel:
+            channel.send(f"{member.mention} has joined the {member.guild.name} server")
+    
 @bot.tree.command(name="help", description="see all commands")
 async def help_slash(interaction: discord.Interaction):
     embed = discord.Embed()
@@ -145,21 +159,7 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
     embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
 
-@bot.tree.command(name="welcome", description="select a chennel for welcome")
-@app_commands.describe(channel="pls select a channnel")
-async def welcome(interaction: discord.Interaction, channel: discord.TextChannel):
-    on_member_join(channel=channel)
-    interaction.response.send_message(f"Setted welcome channel in #{channel}!")
 
-async def on_member_join(member, channel):
-    # এই লাইনের মানেই হলো: "IF a member joins, THEN do this"
-    
-    # আপনি এখানে if ব্যবহার করতে পারেন শর্ত চেক করার জন্য
-    # যেমন: যদি বট জয়েন করে, তবে ওয়েলকাম দিও না
-    if member.bot:
-        return 
-    if channel: # যদি চ্যানেলটা খুঁজে পাওয়া যায়
-        await channel.send(f"Welcome {member.mention}!")
 # --- Run Bot ---
 keep_alive()
 token = os.environ.get("TOKEN")
