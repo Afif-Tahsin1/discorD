@@ -1,4 +1,3 @@
-
 from flask import Flask
 from threading import Thread
 import discord
@@ -108,13 +107,16 @@ async def unban_slash(interaction: discord.Interaction, user_input : str):
         else:
             await interaction.send(f"Can't find user {user.name}")
 @bot.tree.command(name="userinfo", description='show your info')
+@app_commands.describe(user_input="Enter name")
 async def userinfo(interaction: discord.Interaction, member: discord.Member):
       embed = discord.Embed(title=f"{member.name}'s info")
       embed.color = discord.Colour.blue()
       embed.set_thumbnail(url=member.avatar.url)
       embed.add_field(name="member's name", value=f"`Name` {member.name} ")
       embed.add_field(name="member's id", value=f"`Id` {member.id}")
+      embed.set_footer(f"Requested by {interaction.user.name}")
       await interaction.response.send_message(embed=embed)
-    
-bot.run(token)
-
+if token:   
+    bot.run(token)
+else:
+      print("Can't found token!")
