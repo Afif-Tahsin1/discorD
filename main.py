@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import os
-
+import random
 # --- Flask Server ---
 app = Flask('')
 channelW = {}
@@ -158,7 +158,44 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
     
     embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
-
+dice1 = discord.File("image1.png")
+dice2 = discord.File("image2.png")
+dice3 = discord.File("image3.png")
+dice4 = discord.File("image4.png")
+dice5 = discord.File("image5.png")
+dice6 = discord.File("image6.png")
+@bot.tree.command(name="roll", description="roll a number from 1 to 6")
+async def roll(interaction: discord.Interaction):
+    randomN = random.randint(1,6)
+    embed = discord.Embed(title="dice", colour=discord.Color.blue())
+    if randomN == 1:
+        embed.add_field(name="dice1", value="you've rolled 1 in the dice!")
+        embed.set_thumbnail(dice1)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+    elif randomN == 2:
+        embed.add_field(name="dice2", value="you've rolled 2 in the dice!")
+        embed.set_thumbnail(dice2)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+    elif randomN == 3:
+        embed.add_field(name="dice3", value="you've rolled 3 in the dice!")
+        embed.set_thumbnail(dice3)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+    elif randomN == 4:
+        embed.add_field(name="dice4", value="you've rolled 4 in the dice!")
+        embed.set_thumbnail(dice4)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+    elif randomN == 5:
+        embed.add_field(name="dice5", value="you've rolled 5 in the dice!")
+        embed.set_thumbnail(dice5)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+    elif randomN == 6:
+        embed.add_field(name="dice6", value="Congrats! you've rolled 6 in the dice!")
+        embed.set_thumbnail(dice6)
+        embed.set_footer(f"© Requested by {interaction.user.name}")
+        
+        
+        
 
 # --- Run Bot ---
 keep_alive()
