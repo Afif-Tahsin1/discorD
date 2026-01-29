@@ -5,14 +5,14 @@ from discord.ext import commands
 from discord import app_commands
 import os
 app = Flask('')
-#HHSW
+
 @app.route('/')
 def home():
     return "I am alive! Boss!"
 
 def run_web():
-    # Render যদি কোনো পোর্ট দেয় সেটা নেবে, না দিলে ৮০৮০ নেবে
-    port = int(os.environ.get("PORT", 8080))
+    # এই লাইনটা খেয়াল করুন 👇
+    port = int(os.environ.get("PORT", 8080))  
     app.run(host='0.0.0.0', port=port)
 
 def keep_alive():
@@ -106,6 +106,12 @@ async def unban_slash(interaction: discord.Interaction, user_input : str):
               await interaction.response.send_message(f"{user.name} is unbanned from the server")
         else:
             await interaction.send(f"Can't find user {user.name}")
-            #KI HOILO???!
+@bot.tree.command(name="userinfo", description='show your info')
+async def userinfo(interaction: discord.Interaction, member: discord.Member):
+      embed = discord.Embed(title=f"{member.name}'s info")
+      embed.color = discord.Colour.blue()
+      embed.set_thumbnail(url=member.avatar.url)
+      embed.add_field(name="member's name", value=f"`Name` {member.name} ")
+      embed.add_field(name="member's id", value=f"`Id` {member.id}")
+      await interaction.response.send_message(embed=embed)
 bot.run(token)
-
