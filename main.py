@@ -107,7 +107,7 @@ async def unban_slash(interaction: discord.Interaction, user_input : str):
         else:
             await interaction.send(f"Can't find user {user.name}")
 @bot.tree.command(name="userinfo", description='show your info')
-@app_commands.describe(user_input="Enter name")
+@app_commands.describe(member="Enter name")
 async def userinfo(interaction: discord.Interaction, member: discord.Member):
       embed = discord.Embed(title=f"{member.name}'s info")
       embed.color = discord.Colour.blue()
