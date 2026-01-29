@@ -111,12 +111,15 @@ async def unban_slash(interaction: discord.Interaction, user_input : str):
 async def userinfo(interaction: discord.Interaction, member: discord.Member):
       embed = discord.Embed(title=f"{member.name}'s info", color = discord.Colour.blue())
       embed.set_thumbnail(url=member.avatar.url)
-      embed.add_field(name="member's name", value=f"``Name`` {member.name} ")
-      embed.add_field(name="member's id", value=f"``Id`` {member.id}")
-      embed.add_field(name="member joined at", value=f"``Joined at {member.joined_at.strftime("%Y-%m-%d")}``")
+      embed.add_field(name="member's name", value=f"``Name`` {member.name} ", inline=False)
+      embed.add_field(name="member's id", value=f"``Id`` {member.id}", inline=False)
+      embed.add_field(name="member joined at", value=f"``Joined at {member.joined_at.strftime("%Y-%m-%d")}``", inline=False)
       embed.set_footer(text=f"Requested by {interaction.user.name}")
       await interaction.response.send_message(embed=embed)
-if token:   
-    bot.run(token)
+ 
+if token:
+      print("Token found!")
+      bot.run(token)
 else:
       print("Can't found token!")
+    
