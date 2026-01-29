@@ -7,7 +7,7 @@ import os
 
 # --- Flask Server ---
 app = Flask('')
-alert = 0
+
 @app.route('/')
 def home():
     return "I am alive! Boss!"
@@ -78,11 +78,10 @@ async def unban(ctx, user_input):
 @bot.command(name="alert", help="alert a player")
 @commands.has_permissions(manage_messages=True)
 async def alert(ctx, member: discord.Member):
-    alert =+ 1
-    user_id = ctx.author.id
-    alertU = user_id[alert]
-    await ctx.send(f"{member.mention}, You've been warned, This is your {alertU}no. warning")
+    
+    await ctx.send(f"{member.mention}, You've been warned")
     await member.send(f"You've been warned from {ctx.guild.name}")
+        
 # --- Slash Commands (Tree) ---
 
 @bot.tree.command(name="help", description="see all commands")
@@ -150,7 +149,8 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
 # --- Run Bot ---
 keep_alive()
 token = os.environ.get("TOKEN")
-if token: 
+if token:
+
     print("Token found! Starting bot...")
     bot.run(token)
 else:
