@@ -79,7 +79,8 @@ async def unban(ctx, user_input):
 @commands.has_permissions(manage_messages=True)
 async def alert(ctx, member: discord.Member):
     alert =+ 1
-    alertU = member[alert]
+    user_id = ctx.author.id
+    alertU = user_id[alert]
     await ctx.send(f"{member.mention}, You've been warned, This is your {alertU}no. warning")
     await member.send(f"You've been warned from {ctx.guild.name}")
 # --- Slash Commands (Tree) ---
