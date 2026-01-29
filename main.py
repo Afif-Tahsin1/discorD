@@ -24,6 +24,7 @@ def keep_alive():
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix=["!", "?", ".", "$"], intents=intents, help_command=None)
+intents.members = True
 
 @bot.event
 async def on_ready():
@@ -144,8 +145,22 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
     embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
 
+@bot.tree.command(name="welcome", description="select a chennel for welcome")
+@app_commands.describe(channel="pls select a channnel")
+async def welcome(interaction: discord.Interaction, channel: discord.TextChannel):
+    on_member_join(channel=channel)
 
+async def on_member_join(member, channel):
+    # এই লাইনের মানেই হলো: "IF a member joins, THEN do this"
+    
+    # আপনি এখানে if ব্যবহার করতে পারেন শর্ত চেক করার জন্য
+    # যেমন: যদি বট জয়েন করে, তবে ওয়েলকাম দিও না
+    if member.bot:
+        return 
 
+    
+    if channel: # যদি চ্যানেলটা খুঁজে পাওয়া যায়
+        await channel.send(f"Welcome {member.mention}!")
 # --- Run Bot ---
 keep_alive()
 token = os.environ.get("TOKEN")
