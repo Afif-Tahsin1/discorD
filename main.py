@@ -149,6 +149,7 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
 @app_commands.describe(channel="pls select a channnel")
 async def welcome(interaction: discord.Interaction, channel: discord.TextChannel):
     on_member_join(channel=channel)
+    interaction.response.send_message(f"Setted welcome channel in #{channel}!")
 
 async def on_member_join(member, channel):
     # এই লাইনের মানেই হলো: "IF a member joins, THEN do this"
@@ -157,8 +158,6 @@ async def on_member_join(member, channel):
     # যেমন: যদি বট জয়েন করে, তবে ওয়েলকাম দিও না
     if member.bot:
         return 
-
-    
     if channel: # যদি চ্যানেলটা খুঁজে পাওয়া যায়
         await channel.send(f"Welcome {member.mention}!")
 # --- Run Bot ---
