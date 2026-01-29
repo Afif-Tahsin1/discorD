@@ -75,7 +75,11 @@ async def unban(ctx, user_input):
             break
     if not found:
         await ctx.send(f"Can't find user {user_input}")
-
+@bot.command(name="alert", help="alert a player")
+@commands.has_permissions(manage_messages=True)
+async def alert(ctx, member: discord.Member):
+    await ctx.send(f"{member.mention}, You've been warned")
+    await member.send(f"You've been warned from {ctx.guild.name}")
 # --- Slash Commands (Tree) ---
 
 @bot.tree.command(name="help", description="see all commands")
@@ -138,11 +142,12 @@ async def userinfo(interaction: discord.Interaction, member: discord.Member):
     embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
 
+
+
 # --- Run Bot ---
 keep_alive()
 token = os.environ.get("TOKEN")
-
-if token:
+if token: 
     print("Token found! Starting bot...")
     bot.run(token)
 else:
