@@ -172,27 +172,33 @@ async def roll(interaction: discord.Interaction):
         embed.add_field(name="dice1", value="you've rolled 1 in the dice!")
         embed.set_thumbnail(dice1)
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
     elif randomN == 2:
         embed.add_field(name="dice2", value="you've rolled 2 in the dice!")
         embed.set_thumbnail(dice2)
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
     elif randomN == 3:
         embed.add_field(name="dice3", value="you've rolled 3 in the dice!")
         embed.set_thumbnail(dice3)
         embed.set_footer(f"© Requested by {interaction.user.name}")
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
     elif randomN == 4:
         embed.add_field(name="dice4", value="you've rolled 4 in the dice!")
         embed.set_thumbnail(dice4)
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
     elif randomN == 5:
         embed.add_field(name="dice5", value="you've rolled 5 in the dice!")
         embed.set_thumbnail(dice5)
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
     elif randomN == 6:
         embed.add_field(name="dice6", value="Congrats! you've rolled 6 in the dice!")
         embed.set_thumbnail(dice6)
         embed.set_footer(f"© Requested by {interaction.user.name}")
+        interaction.response.send_message(embed=embed)
         
         
         
