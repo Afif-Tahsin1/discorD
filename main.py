@@ -7,7 +7,7 @@ import os
 
 # --- Flask Server ---
 app = Flask('')
-
+alert = 0
 @app.route('/')
 def home():
     return "I am alive! Boss!"
@@ -78,7 +78,9 @@ async def unban(ctx, user_input):
 @bot.command(name="alert", help="alert a player")
 @commands.has_permissions(manage_messages=True)
 async def alert(ctx, member: discord.Member):
-    await ctx.send(f"{member.mention}, You've been warned")
+    alert =+ 1
+    alertU = member[alert]
+    await ctx.send(f"{member.mention}, You've been warned, This is your {alertU}no. warning")
     await member.send(f"You've been warned from {ctx.guild.name}")
 # --- Slash Commands (Tree) ---
 
