@@ -97,7 +97,7 @@ async def on_member_join(member):
         channel_id = channelW[guild_id]
         channel = bot.get_channel(channel_id)
         if channel:
-            channel.send(f"{member.mention} has joined the {member.guild.name} server")
+            await channel.send(f"{member.mention} has joined the {member.guild.name} server")
     
 @bot.tree.command(name="help", description="see all commands")
 async def help_slash(interaction: discord.Interaction):
