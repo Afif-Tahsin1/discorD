@@ -175,7 +175,7 @@ async def roll(interaction: discord.Interaction):
         embed.add_field(name="dice1", value="you've rolled 1 in the dice!")
         embed.set_thumbnail(url=dice1)
         
-        interaction.response.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed)
     elif randomN == 2:
         embed.add_field(name="dice2", value="you've rolled 2 in the dice!")
         embed.set_thumbnail(url=dice2)
