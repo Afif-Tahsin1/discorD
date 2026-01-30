@@ -235,7 +235,7 @@ async def setwords(interaction: discord.Interaction, reportabt : str):
     member = interaction.user.id
     print(f"Someone Reported!\n{member}:{reportabt}")
 @bot.event
-async def on_message( message):
+async def on_message(message):
     if message.author == bot.user: 
         return
     
@@ -244,7 +244,7 @@ async def on_message( message):
         # Get the value using the key (message.content)
         await message.channel.send(reply[message.content])
     if message.content.lower() in badW:   
-        await message.channel.send("No bad words allowed!")
+        await message.channel.send(f"No bad words allowed! {message.author} sent a bad words!")
         await message.delete()
     
     await bot.process_commands(message)
