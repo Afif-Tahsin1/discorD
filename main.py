@@ -10,7 +10,7 @@ app = Flask('')
 channelW = {}
 reply = {}
 badW = {}
-
+user = []
 @app.route('/')
 def home():
     return "I am alive! Boss!"
@@ -175,7 +175,7 @@ async def roll(interaction: discord.Interaction):
         embed.add_field(name="dice1", value="you've rolled 1 in the dice!")
         embed.set_thumbnail(url=dice1)
         
-        await interaction.response.send_message(embed=embed)
+        interaction.response.send_message(embed=embed)
     elif randomN == 2:
         embed.add_field(name="dice2", value="you've rolled 2 in the dice!")
         embed.set_thumbnail(url=dice2)
@@ -228,14 +228,9 @@ async def replys(interaction: discord.Interaction, rname:str, rreply:str):
 async def setwords(interaction: discord.Interaction, badws : str):
     badW[badws] = badws
     await interaction.response.send_message("Setted bad words!")
-@bot.tree.command(name="report", description="report this bot about something")
-@app_commands.describe(reportabt= "select report reason")
-async def setwords(interaction: discord.Interaction, reportabt : str):
-    await interaction.response.send_message("reported successfully!", ephemeral=True)
-    member = interaction.user.id
-    print(f"Someone Reported!\n{member}:{reportabt}")
+    
 @bot.event
-async def on_message(message):
+async def on_message( message):
     if message.author == bot.user: 
         return
     
@@ -244,7 +239,7 @@ async def on_message(message):
         # Get the value using the key (message.content)
         await message.channel.send(reply[message.content])
     if message.content.lower() in badW:   
-        await message.channel.send(f"No bad words allowed! {message.author} sent a bad words!")
+        await message.channel.send("No bad words allowed!")
         await message.delete()
     
     await bot.process_commands(message)
